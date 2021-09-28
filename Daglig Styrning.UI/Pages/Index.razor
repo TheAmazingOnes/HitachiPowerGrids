@@ -1,6 +1,5 @@
 ﻿@page "/"
 
-@using Business.Classes;
 @using Common.Classes;
 @using Common.Interfaces;
 @using Common.Enum;
@@ -8,28 +7,9 @@
 @using UI.Models;
 
 @inject IDayEventService dayEventService;
-@inject ActionPlanProcessor APP
 @inject IDataAccess _data
 @inject IConfiguration _config
 @*https://github.com/TheAmazingOnes/HitachiPowerGrids.git*@
-
-    @*<button class="btn btn-primary" @onclick="InsertData">Insert</button>*@
-    @*<button class="btn btn-warning" @onclick="UpdateData">Update</button>
-    <button class="btn btn-danger" @onclick="DeleteData">Delete</button>
-    @if (pointsOfAction == null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else
-    {
-        @foreach (var p in pointsOfAction)
-        {
-            <p>
-                @p.Description @p.Accountable @p.Status @p.ActionDate
-            </p>
-        }
-    }*@
-
 
 <div class="d-flex flex-column justify-content-center align-items-center text-center">
      @*First centering the container horizontally then vertically*@
@@ -42,119 +22,36 @@
     </nav>
 </div>
 
-<!--<section id="categories" class="p-4 bg-white">-->
-     @*p-5 all around padding, instead padding bottom/top or right/left*@ 
-    <!--<div class="d-flex flex-column justify-content-center align-items-center text-center">-->
-         @*First centering the container horizontally then vertically*@
-
-        <!--<label class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center">
-            Säkerhet
-            <img src="images/Säkerhet.PNG" class="icon-size mr-2 p-1">
-        </label>
-
-            <span class="container display-7 heading-font mb-3  flex-row justify-content-center align-items-center text-success">
-                OK
-                <img src="images/PinOk.PNG" class="icon-size mr-0 p-1">
-                <span class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-info">
-                    Tillbud
-                    <img src="images/PinTillbud.PNG" class="icon-size mr-2 p-1">
-                </span>
-                <span class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-danger">
-                    Åtgärd krävs
-                    <img src="images/PinInteOk.PNG" class="icon-size mr-2 p-1">
-                </span>
-            </span>
-
-            <label class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center">
-                Kvalitet
-                <img src="images/Kvalitet.PNG" class="icon-size mr-2 p-1">
-            </label>
-            <span class="container display-7 heading-font mb-3  flex-row justify-content-center align-items-center text-success">
-                OK
-                <img src="images/PinOk.PNG" class="icon-size mr-0 p-1">
-
-                <span class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-danger">
-                    Kvalitetsproblem
-                    <img src="images/PinInteOk.PNG" class="icon-size mr-2 p-1">
-                </span>
-            </span>
-
-            <label class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center">
-                Leverans
-                <img src="images/Leverans.PNG" class="icon-size mr-2 p-1">
-            </label>
-            <span class="container display-7 heading-font mb-3  flex-row justify-content-center align-items-center text-success">
-                OK
-                <img src="images/PinOk.PNG" class="icon-size mr-0 p-1">
-
-                <span class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-danger">
-                    Leveransproblem
-                    <img src="images/PinInteOk.PNG" class="icon-size mr-2 p-1">
-                </span>
-
-                <label class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-black">
-                    Material
-                    <img src="images/Material.PNG" class="icon-size mr-2 p-1">
-                </label>
-                <span class="container display-7 heading-font mb-3  flex-row justify-content-center align-items-center text-success">
-                    OK
-                    <img src="images/PinOk.PNG" class="icon-size mr-0 p-1">
-
-                    <span class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-danger">
-                        Materialproblem
-                        <img src="images/PinInteOk.PNG" class="icon-size mr-2 p-1">
-                    </span>
-
-                    <label class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-black">
-                        Ordning och Reda
-                        <img src="images/OrdningOchReda.PNG" class="icon-size mr-2 p-1">
-                    </label>
-                    <span class="container display-7 heading-font mb-3  flex-row justify-content-center align-items-center text-success">
-                        OK
-                        <img src="images/PinOk.PNG" class="icon-size mr-0 p-1">
-
-                        <span class="container display-7 heading-font mb-3 d-flex flex-row justify-content-center align-items-center text-danger">
-                            Åtgärd krävs
-                            <img src="images/PinInteOk.PNG" class="icon-size mr-2 p-1">
-                        </span>
-                    </span>
-                </span>
-            </span>
-        </div>
-</section>-->
-
-
-
 @if (displayModal)
 {
     <div id="divModal">
         <div class="container">
             <div class="panel panel-default">
-                <div class="panel-heading modalHeading">Notering</div>
+                <div class="panel-heading modalHeading">SQLMO</div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <label>Från Datum : </label>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <input type="date" @bind-value="@dayEvent.FromDate" style="width:100%;" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <label>Till Datum : </label>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <input type="date" @bind-value="@dayEvent.ToDate" style="width: 100%;" />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <label>Säkerhet : </label>
+                    <div class="col-md-5">
+                        <label style="margin-top: 10px;">Säkerhet : </label>
                     </div>
-                    <div class="col-md-8">
-                        <select style="height:31px;" @bind="@dayEvent.Safety">
+                    <div class="col-md-6">
+                        <select style="height: 31px; width: 100%; margin-top: 10px;" @bind="@dayEvent.Safety">
                             @foreach (var type in GetSafetyOptions())
                             {
                                 <option value=@type>@type</option>
@@ -162,25 +59,25 @@
                         </select>
                     </div>
                 </div>
-                @*<div class="row">
-            <div class="col-md-4">
-                <label>Kvalitet : </label>
-            </div>
-            <div class="col-md-8">
-                <select style="height:31px;" @bind="@selectedQualityOption">
-                    @foreach (var type in GetQualityOptions())
-                    {
-                        <option value=@type>@type</option>
-                    }
-                </select>
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Kvalitet : </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select style="height: 31px; width: 100%;" @bind="@dayEvent.Quality">
+                            @foreach (var type in GetQualityOptions())
+                            {
+                                <option value=@type>@type</option>
+                            }
+                        </select>
+                    </div>
+                    </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <label>Leverans : </label>
             </div>
-            <div class="col-md-8">
-                <select style="height:31px;" @bind="@selectedDeliveryOption">
+            <div class="col-md-6">
+                <select style="height: 31px; width: 100%;" @bind="@dayEvent.Delivery">
                     @foreach (var type in GetDeliveryOptions())
                     {
                         <option value=@type>@type</option>
@@ -189,11 +86,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <label>Material : </label>
             </div>
-            <div class="col-md-8">
-                <select style="height:31px;" @bind="@selectedMaterialOption">
+            <div class="col-md-6">
+                <select style="height: 31px; width: 100%;" @bind="@dayEvent.Material">
                     @foreach (var type in GetMaterialOptions())
                     {
                         <option value=@type>@type</option>
@@ -202,40 +99,38 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <label>Ordning & reda : </label>
             </div>
-            <div class="col-md-8">
-                <select style="height:31px;" @bind="@selectedTidyOption">
+            <div class="col-md-6">
+                <select style="height: 31px; width: 100%;" @bind="@dayEvent.Tidy">
                     @foreach (var type in GetTidyOptions())
                     {
                         <option value=@type>@type</option>
                     }
                 </select>
             </div>
-        </div>*@
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Notering : </label>
+        </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label style="margin-top: 10px;">Notering : </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" style="height: 31px; width: 100%; margin-top: 10px;" @bind-value="@dayEvent.Note" placeholder="Skriv här..." />
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <input type="text" @bind-value="@dayEvent.Note" placeholder="Type here..." />
+                    <div class="row" style="margin-bottom:10px;">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-10" style="text-align:right">
+                            <button class="btn save-button save-button:hover flex mx-auto" @onclick="SaveNote" style="margin:15px 5px 15px 5px;">Spara</button>
+                            <button class="btn close-button close-button:hover flex mx-auto" @onclick="CloseModal" style="margin: 15px 5px 15px 5px;">Stäng</button>
+                            @if (dayEvent.DayEventId > 0)
+                            {
+                                <button class="btn delete-button:hover delete-button flex mx-auto" @onclick="DeleteDayEvent" style="margin: 15px 5px 15px 5px;">Ta bort</button>
+                            }
+                        </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom:10px;">
-                    <div class="col-md-6">
-                    </div>
-                    <div class="col-md-6" style="text-align:right">
-                        <button class="btn save-button save-button:hover" @onclick="SaveNote" style="float: left; margin-right: 5px; margin-top: 5px;">Spara</button>
-                        <button class="btn close-button close-button:hover" @onclick="CloseModal" style="float: left; margin-top: 5px;">Stäng</button>
-                        @if (dayEvent.DayEventId > 0)
-                        {
-                            <button class="btn delete-button:hover delete-button" @onclick="DeleteDayEvent" style="float: left; margin-right: 150px; margin-top: 5px; ">Ta bort</button>
-
-                        }
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -273,20 +168,54 @@
                     <br /><br />
                     @if (weeks[weekIndex].Dates[dayIndex].Safety == "OK")
                     {
-                        //Få in ID
-                        <label style="color:black; font-weight: bold">Säkerhet: </label><label style="color:green; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
+                        <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
                     }
                     else if (weeks[weekIndex].Dates[dayIndex].Safety == "Tillbud")
                     {
-                        <label style="color:black; font-weight: bold">Säkerhet: </label><label style="color:blue; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
+                        <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:blue; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
                     }
-                    else
+                    else if (weeks[weekIndex].Dates[dayIndex].Safety == "Olycka")
                     {
-                        <label style="color:black; font-weight: bold">Säkerhet: </label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
+                        <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
+                    }
+                    <br /><br />
+                    @if (weeks[weekIndex].Dates[dayIndex].Quality == "OK")
+                    {
+                        <label style="color:black; font-weight: bold">Kvalitet:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Quality</label>
+                    }
+                    else if (weeks[weekIndex].Dates[dayIndex].Quality == "Kvalitetsproblem")
+                    {
+                        <label style="color:black; font-weight: bold">Kvalitet:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Quality</label>
+                    }
+                    <br /><br />
+                    @if (weeks[weekIndex].Dates[dayIndex].Delivery == "OK")
+                    {
+                        <label style="color:black; font-weight: bold">Leverans:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Delivery</label>
+                    }
+                    else if (weeks[weekIndex].Dates[dayIndex].Delivery == "Leveransproblem")
+                    {
+                        <label style="color:black; font-weight: bold">Leverans:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Delivery</label>
+                    }
+                    <br /><br />
+                    @if (weeks[weekIndex].Dates[dayIndex].Material == "OK")
+                    {
+                        <label style="color:black; font-weight: bold">Material:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Material</label>
+                    }
+                    else if (weeks[weekIndex].Dates[dayIndex].Material == "Materialproblem")
+                    {
+                        <label style="color:black; font-weight: bold">Material:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Material</label>
+                    }
+                    <br /><br />
+                    @if (weeks[weekIndex].Dates[dayIndex].Tidy == "OK")
+                    {
+                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
+                    }
+                    else if (weeks[weekIndex].Dates[dayIndex].Tidy == "Åtgärd_Krävs")
+                    {
+                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
                     }
                     <br /><br />
                     <label style="color:#c00; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Note</label>
-
                 </td>
                 }
             </tr>
@@ -346,25 +275,12 @@
                 @foreach (var p in pointsOfAction)
                 {
                     <tr>
-                        <th scope="row"><input type="checkbox" id="checkBox1" @bind="checkboxStatus[p.PointOfActionId]" @onclick="() => ChangeCheckboxStatus(p.PointOfActionId)"/></th>
+                        <th scope="row"><input type="checkbox" id="checkBox1" @onclick="() => ChangeCheckboxStatus(p.PointOfActionId)"/></th>
                         <th>@p.Description</th>
                         <th>@p.Category</th>
                         <th>@p.Accountable</th>
                         <th>@p.Project</th>
-                        <th>@p.Status
-                            @*@if (p.Status == "1")
-                            {
-                                <span href="#" class="badge badge-success">Skapad</span>
-                            }
-                            else if (p.Status = "2")
-                                {
-                                    <span href="#" class="badge badge-primary">Behandlas</span>
-                                }
-                                else
-                                {
-                                    <span href="#" class="badge badge-warning">Eskalerad</span>
-                                }*@
-                        </th>
+                        <th>@p.Status</th>
                         <th>@p.ActionDate.ToShortDateString()</th>
                         <th></th>
                     </tr>
@@ -372,8 +288,8 @@
             </tbody>
             <tr class="thead-light">
                 <th scope="col"></th>
-                <th scope="col"><button class="btn btn-info btn-sm" @onclick="UpdateActionStatus">Påbörja</button></th>
-                <th scope="col"><button class="btn btn-primary btn-sm" @onclick="EscalateAction">Eskalera</button></th>
+                <th scope="col"><button class="btn btn-info btn-sm" @onclick="UpdateActionStatusToStarted">Påbörja</button></th>
+                <th scope="col"><button class="btn btn-primary btn-sm" @onclick="UpdateActionStatusToEscalated">Eskalera</button></th>
                 <th scope="col"><button class="btn btn-secondary btn-sm" @onclick="FileAction">Arkivera</button></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -398,10 +314,6 @@
     DateTime endDate = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).AddMonths(1).AddDays(-1);
     int selectedWeekIndex = -1;
     int selectedDayIndex = -1;
-    string selectedQualityOption = default;
-    string selectedDeliveryOption = default;
-    string selectedMaterialOption = default;
-    string selectedTidyOption = default;
     #endregion
 
     //Handlingsplan
@@ -414,33 +326,12 @@
     string selectedStatus = "Skapad";
     DateTime actionDate = DateTime.Now;
     IEnumerable<IPointOfAction> actionpoints;
-    //int actionId = IPointOfAction.Id;
     #endregion
 
     //DataAccess
     #region Variabler
     List<PointsOfActionModel> pointsOfAction;
     #endregion
-
-    //private void InsertData()
-    //{
-    //    string sql = "insert into pointsOfAction (Description, Category, Accountable, Project, Status) values (@Description, @Category, @Accountable, @Project, @Status)";
-
-    //    _data.SavePointOfAction(sql, new { Description = "Test 123", Category = "S", Accountable = "Lina", Project = "X", Status = "Skapad" }, _config.GetConnectionString("DagligStyrningDB"));
-
-    //    OnInitialized();
-    //}
-
-
-    private void DeleteData()
-    {
-        string sql = "delete from pointsOfAction where Accountable = @Accountable";
-
-        _data.SavePointOfAction(sql, new { Accountable = "Lina" }, _config.GetConnectionString("DagligStyrningDB"));
-
-        OnInitialized();
-    }
-
 
     //Körs när sidan laddas
     protected override void OnInitialized()
@@ -511,7 +402,11 @@
             DateValue = dt.ToString("dd-MMM-yyyy"),
             DayName = dt.ToString("dddd"),
             Note = currentObject == null ? "" : currentObject.Note,
-            Safety = currentObject == null ? "" : currentObject.Safety
+            Safety = currentObject == null ? "" : currentObject.Safety,
+            Quality = currentObject == null ? "" : currentObject.Quality,
+            Delivery = currentObject == null ? "" : currentObject.Delivery,
+            Material = currentObject == null ? "" : currentObject.Material,
+            Tidy = currentObject == null ? "" : currentObject.Tidy
 
         });
 
@@ -561,9 +456,11 @@ private void SaveNote()
         weeks[selectedWeekIndex].Dates[selectedDayIndex].DayEventId = dayEvent.DayEventId;
         weeks[selectedWeekIndex].Dates[selectedDayIndex].Note = dayEvent.Note;
 
-        //Spara SQLMO här?
         weeks[selectedWeekIndex].Dates[selectedDayIndex].Safety = dayEvent.Safety;
-
+        weeks[selectedWeekIndex].Dates[selectedDayIndex].Quality = dayEvent.Quality;
+        weeks[selectedWeekIndex].Dates[selectedDayIndex].Delivery = dayEvent.Delivery;
+        weeks[selectedWeekIndex].Dates[selectedDayIndex].Material = dayEvent.Material;
+        weeks[selectedWeekIndex].Dates[selectedDayIndex].Tidy = dayEvent.Tidy;
 
         ResetModal();
     }
@@ -611,8 +508,6 @@ public List<string> GetTidyOptions()
     return Enum.GetNames(typeof(TidyOptions)).ToList();
 }
 
-
-
 //Handlingsplan
 
 public List<string> GetActionStatuses()
@@ -622,7 +517,7 @@ public List<string> GetActionStatuses()
 
 private void GetPointsOfAction()
 {
-    string sql = "select * from PointsOfAction";
+    string sql = "select * from PointsOfAction where Status != 'Arkiverad'";
 
     pointsOfAction = _data.GetPointsOfAction<PointsOfActionModel, dynamic>(sql, new { }, _config.GetConnectionString("DagligStyrningDB"));
 }
@@ -644,41 +539,118 @@ private void SaveAction()
     actionDate = DateTime.Now;
 }
 
-void UpdateActionStatus()
+void UpdateActionStatusToStarted()
 {
-    //if (checkboxStatus = true)
-    //{
-    try
+    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
     {
-        //string sql = "update pointsOfAction set Status = @editStatus where PointOfActionId = @actionId";
+        int dbId;
+        if (valuePair.Value == true)
+        {
+            try
+            {
+                string dbIdString = valuePair.Key.ToString();
+                string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
 
-        //_data.SavePointOfAction(sql, new { PointOfActionID = @actionId }, _config.GetConnectionString("DagligStyrningDB"));
+                _data.SavePointOfAction(sql, new { Status = "Påbörjad" }, _config.GetConnectionString("DagligStyrningDB"));
 
-
-        //GetPointsOfAction();
-        //InitCheckboxStatus();
-
-
+                GetPointsOfAction();
+                InitCheckboxStatus();
+            }
+            catch (Exception ex)
+            {
+                //Tilldelar felmeddelandet
+                error = ex.Message;
+            }
+        }
     }
-    catch (Exception ex)
-    {
-        //Tilldelar felmeddelandet
-        error = ex.Message;
-    }
-    //}
 }
 
-//Den längst upp
-private void UpdateData()
+void UpdateActionStatusToEscalated()
 {
-    string sql = "update pointsOfAction set Description = @Description where Accountable = @Accountable";
+    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+    {
+        int dbId;
+        if (valuePair.Value == true)
+        {
+            try
+            {
+                string dbIdString = valuePair.Key.ToString();
+                string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
 
-    _data.SavePointOfAction(sql, new { Description = "Hello Hey", Category = "Q", Accountable = "Lina", Project = "X", Status = "Eskalerad" }, _config.GetConnectionString("DagligStyrningDB"));
+                _data.SavePointOfAction(sql, new { Status = "Eskalerad" }, _config.GetConnectionString("DagligStyrningDB"));
+
+                GetPointsOfAction();
+                InitCheckboxStatus();
+            }
+            catch (Exception ex)
+            {
+                //Tilldelar felmeddelandet
+                error = ex.Message;
+            }
+        }
+    }
+}
+
+void FileAction()
+{
+    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+    {
+        int dbId;
+        if (valuePair.Value == true)
+        {
+            try
+            {
+                string dbIdString = valuePair.Key.ToString();
+                string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
+
+                _data.SavePointOfAction(sql, new { Status = "Arkiverad" }, _config.GetConnectionString("DagligStyrningDB"));
+
+                GetPointsOfAction();
+                InitCheckboxStatus();
+            }
+            catch (Exception ex)
+            {
+                //Tilldelar felmeddelandet
+                error = ex.Message;
+            }
+        }
+    }
+}
+
+void DeleteAction()
+{
+    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+    {
+        int dbId;
+        if (valuePair.Value == true)
+        {
+            try
+            {
+                string dbIdString = valuePair.Key.ToString();
+                string sql = "delete from pointsOfAction where PointOfActionId = @PointOfActionId";
+
+                _data.SavePointOfAction(sql, new { PointOfActionId = dbIdString }, _config.GetConnectionString("DagligStyrningDB"));
+
+                GetPointsOfAction();
+                InitCheckboxStatus();
+            }
+            catch (Exception ex)
+            {
+                //Tilldelar felmeddelandet
+                error = ex.Message;
+            }
+        }
+    }
+}
+
+private void DeleteData()
+{
+    string sql = "delete from pointsOfAction where Accountable = @Accountable";
+
+    _data.SavePointOfAction(sql, new { Accountable = "Lina" }, _config.GetConnectionString("DagligStyrningDB"));
 
     OnInitialized();
 }
-
-
 
 
 //checkbox
@@ -686,6 +658,7 @@ Dictionary<int, bool> checkboxStatus = new Dictionary<int, bool>();
 
 public void InitCheckboxStatus()
 {
+    checkboxStatus = new Dictionary<int, bool>();
     foreach (var p in pointsOfAction)
     {
         checkboxStatus.Add(p.PointOfActionId, false);
@@ -703,83 +676,4 @@ public void ChangeCheckboxStatus(int s)
         checkboxStatus[s] = false;
     }
 }
-
-
-
-
-//void AddAction()
-//{
-//    try
-//    {
-//        if (description == string.Empty || accountable == string.Empty || category == string.Empty || project == string.Empty)
-//            throw new AggregateException("Kunde inte lägga till handlingspunkt.");
-
-//        else
-//        {
-//            APP.AddAction(description, accountable, category, project, ActionPointStatuses.Skapad, actionDate);
-
-//            actionpoints = APP.GetActionPoints();
-
-//            description = string.Empty;
-//            accountable = string.Empty;
-//            category = default;
-//            project = string.Empty;
-//            selectedStatus = default;
-//            actionDate = DateTime.Now;
-//        }
-
-//    }
-//    catch (Exception ex)
-//    {
-//            Tilldelar felmeddelandet
-//            error = ex.Message;
-//        }
-//    }
-
-void EscalateAction()
-{
-    try
-    {
-
-
-    }
-    catch (Exception ex)
-    {
-        //Tilldelar felmeddelandet
-        error = ex.Message;
-    }
-}
-
-void FileAction()
-{
-    try
-    {
-
-
-    }
-    catch (Exception ex)
-    {
-        //Tilldelar felmeddelandet
-        error = ex.Message;
-    }
-}
-
-void DeleteAction()
-{
-    try
-    {
-        //Delete from DB
-        //checkboxStatus.Remove(id)
-        //GetPointsOfAction();
-        //InitCheckboxStatus();
-
-    }
-    catch (Exception ex)
-    {
-        //Tilldelar felmeddelandet
-        error = ex.Message;
-    }
-}
-
-
 }

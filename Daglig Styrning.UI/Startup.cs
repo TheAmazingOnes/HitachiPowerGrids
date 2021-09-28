@@ -1,4 +1,3 @@
-using Business.Classes;
 using Common.Classes;
 using Common.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +28,6 @@ namespace Daglig_Styrning.UI
             services.AddServerSideBlazor();
             services.AddScoped<IDayEventService, DayEventService>();
 
-            services.AddSingleton<ActionPlanProcessor>();
             services.AddSingleton<IDataAccess, DataAccess>();
         }
 

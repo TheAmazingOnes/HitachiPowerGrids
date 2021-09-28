@@ -113,7 +113,10 @@ namespace Common.Classes
                 parameters.Add("@EventDate", oDayEvent.EventDate);
                 parameters.Add("@DayEventId", oDayEvent.DayEventId);
                 parameters.Add("@Safety", oDayEvent.Safety);
-
+                parameters.Add("@Quality", oDayEvent.Quality);
+                parameters.Add("@Delivery", oDayEvent.Delivery);
+                parameters.Add("@Material", oDayEvent.Material);
+                parameters.Add("@Tidy", oDayEvent.Tidy);
 
                 using (IDbConnection con = new SqlConnection(Configuration.GetConnectionString("DagligStyrningDB")))
                 {
@@ -124,24 +127,20 @@ namespace Common.Classes
                     {
                         q = @"
                         INSERT 
-                        INTO   DayEvent(Note, EventDate, Safety)
-                        VALUES (@Note,@EventDate,@Safety); SELECT SCOPE_IDENTITY() ";
-
+                        INTO   DayEvent(Note, EventDate, Safety, Quality, Delivery, Material, Tidy)
+                        VALUES (@Note,@EventDate,@Safety, @Quality, @Delivery, @Material, @Tidy); SELECT SCOPE_IDENTITY() ";
                     }
-
                     else
                     {
                         q = @"UPDATE   DayEvent
-                            SET   Note = @Note, EventDate = @EventDate, Safety = @Safety
+                            SET   Note = @Note, EventDate = @EventDate, Safety = @Safety, Quality = @Quality, Delivery = @Delivery, Material = @Material, Tidy = @Tidy
                             WHERE DayEventId = @DayEventId";
-
                     }
 
                     if (oDayEvent.DayEventId == 0)
                     {
                         oDayEvent.DayEventId = con.ExecuteScalar<int>(q, parameters);
                     }
-
                     else
                     {
                         con.Execute(q, parameters);
@@ -157,12 +156,10 @@ namespace Common.Classes
                     //}
                 }
             }
-
             catch (Exception ex)
             {
                 oDayEvent.Message = ex.Message;
             }
-
             return oDayEvent;
         }
 
@@ -175,14 +172,12 @@ namespace Common.Classes
             parameters.Add("@EventDate", oDayEvent.EventDate);
             parameters.Add("@OperationType", operationType);
             parameters.Add("@Safety", oDayEvent.Safety);
-
+            parameters.Add("@Quality", oDayEvent.Quality);
+            parameters.Add("@Delivery", oDayEvent.Delivery);
+            parameters.Add("@Material", oDayEvent.Material);
+            parameters.Add("@Tidy", oDayEvent.Tidy);
 
             return parameters;
-
         }
     }
 }
-
-
-
-
