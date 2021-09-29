@@ -117,6 +117,7 @@ namespace Common.Classes
                 parameters.Add("@Delivery", oDayEvent.Delivery);
                 parameters.Add("@Material", oDayEvent.Material);
                 parameters.Add("@Tidy", oDayEvent.Tidy);
+                parameters.Add("@Actions_Id", oDayEvent.ActionsOfTheDay);
 
                 using (IDbConnection con = new SqlConnection(Configuration.GetConnectionString("DagligStyrningDB")))
                 {
@@ -176,6 +177,7 @@ namespace Common.Classes
             parameters.Add("@Delivery", oDayEvent.Delivery);
             parameters.Add("@Material", oDayEvent.Material);
             parameters.Add("@Tidy", oDayEvent.Tidy);
+            parameters.Add("@Actions_Id", oDayEvent.ActionsOfTheDay);
 
             return parameters;
         }

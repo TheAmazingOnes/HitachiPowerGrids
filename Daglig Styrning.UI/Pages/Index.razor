@@ -12,14 +12,40 @@
 @*https://github.com/TheAmazingOnes/HitachiPowerGrids.git*@
 
 <div class="d-flex flex-column justify-content-center align-items-center text-center">
-     @*First centering the container horizontally then vertically*@
+    @*First centering the container horizontally then vertically*@
     <div class="display-6 heading-font heading-font mt-5 mb-1">Daglig styrning</div>
     <nav class="d-flex flex-row max-width align-items-center justify-content-center p-1 mx-auto bg-white">
         <img src="images/SQLMO whole.png">
         <div class="d-none d-md-flex">
-             @*Adjusts visibility with the size of the screen*@
+            @*Adjusts visibility with the size of the screen*@
         </div>
     </nav>
+</div>
+
+<div class="d-flex flex-column justify-content-center align-items-center text-center">
+    <div class="display-6 heading-font heading-font mt-5 mb-1 thicker">STOP! Take 5</div>
+    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Stanna upp</div>
+    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Tänk efter</div>
+    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Identifiera risker</div>
+    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Planera arbetet</div>
+    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Jobba säkert och med hög kvalitet</div>
+    <nav class="d-flex flex-row max-width align-items-center justify-content-center p-1 mx-auto bg-white">
+        <img src="images/StopTakeFive.PNG">
+        <div class="d-none d-md-flex">
+            @*Adjusts visibility with the size of the screen*@
+        </div>
+    </nav>
+
+    @*<h1 class="thicker"><u>Dagens Åtgärder:</u></h1>
+        <form action="/action_page.php">
+            <input type="checkbox" id="Åtgärd1" name="Åtgärd1" value="Åtgärd">
+            <label for="vehicle1" class="thick"> Åtgärd 1</label><br>
+            <input type="checkbox" id="Åtgärd2" name="Åtgärd2" value="Åtgärd">
+            <label for="vehicle2" class="thick"> Åtgärd 2</label><br>
+            <input type="text" class="signature" />
+            <input type="submit" class="text-success thicker" value="Signera dagen">
+            <input type="submit" class="text-info thicker" value="Ny åtgärd">
+        </form>*@
 </div>
 
 @if (displayModal)
@@ -71,66 +97,79 @@
                             }
                         </select>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Leverans : </label>
                     </div>
-        <div class="row">
-            <div class="col-md-5">
-                <label>Leverans : </label>
-            </div>
-            <div class="col-md-6">
-                <select style="height: 31px; width: 100%;" @bind="@dayEvent.Delivery">
-                    @foreach (var type in GetDeliveryOptions())
-                    {
-                        <option value=@type>@type</option>
-                    }
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <label>Material : </label>
-            </div>
-            <div class="col-md-6">
-                <select style="height: 31px; width: 100%;" @bind="@dayEvent.Material">
-                    @foreach (var type in GetMaterialOptions())
-                    {
-                        <option value=@type>@type</option>
-                    }
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <label>Ordning & reda : </label>
-            </div>
-            <div class="col-md-6">
-                <select style="height: 31px; width: 100%;" @bind="@dayEvent.Tidy">
-                    @foreach (var type in GetTidyOptions())
-                    {
-                        <option value=@type>@type</option>
-                    }
-                </select>
-            </div>
-        </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <label style="margin-top: 10px;">Notering : </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" style="height: 31px; width: 100%; margin-top: 10px;" @bind-value="@dayEvent.Note" placeholder="Skriv här..." />
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom:10px;">
-                        <div class="col-md-6"></div>
-                        <div class="col-md-10" style="text-align:right">
-                            <button class="btn save-button save-button:hover flex mx-auto" @onclick="SaveNote" style="margin:15px 5px 15px 5px;">Spara</button>
-                            <button class="btn close-button close-button:hover flex mx-auto" @onclick="CloseModal" style="margin: 15px 5px 15px 5px;">Stäng</button>
-                            @if (dayEvent.DayEventId > 0)
+                    <div class="col-md-6">
+                        <select style="height: 31px; width: 100%;" @bind="@dayEvent.Delivery">
+                            @foreach (var type in GetDeliveryOptions())
                             {
-                                <button class="btn delete-button:hover delete-button flex mx-auto" @onclick="DeleteDayEvent" style="margin: 15px 5px 15px 5px;">Ta bort</button>
+                                <option value=@type>@type</option>
                             }
-                        </div>
+                        </select>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Material : </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select style="height: 31px; width: 100%;" @bind="@dayEvent.Material">
+                            @foreach (var type in GetMaterialOptions())
+                            {
+                                <option value=@type>@type</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Ordning & reda : </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select style="height: 31px; width: 100%;" @bind="@dayEvent.Tidy">
+                            @foreach (var type in GetTidyOptions())
+                            {
+                                <option value=@type>@type</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label>Stop! Take 5 : </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select style="height: 31px; width: 100%;" @bind="@selectedActionOfTheDayOption">
+                            @foreach (var type in ActionsOfTheDayTypes())
+                            {
+                                <option value=@type>@type</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label style="margin-top: 10px;">Notering : </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" style="height: 31px; width: 100%; margin-top: 10px;" @bind-value="@dayEvent.Note" placeholder="Skriv här..." />
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:10px;">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-10" style="text-align:right">
+                        <button class="btn save-button save-button:hover flex mx-auto" @onclick="SaveNote" style="margin:15px 5px 15px 5px;">Spara</button>
+                        <button class="btn close-button close-button:hover flex mx-auto" @onclick="CloseModal" style="margin: 15px 5px 15px 5px;">Stäng</button>
+                        @if (dayEvent.DayEventId > 0)
+                        {
+                            <button class="btn delete-button:hover delete-button flex mx-auto" @onclick="DeleteDayEvent" style="margin: 15px 5px 15px 5px;">Ta bort</button>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -215,6 +254,15 @@
                         <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
                     }
                     <br /><br />
+                    @if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes == "Signerad")
+                    {
+                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes</label>
+                    }
+                    else if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes == "Åtgärd_Krävs")
+                    {
+                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes</label>
+                    }
+                    <br /><br />
                     <label style="color:#c00; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Note</label>
                 </td>
                 }
@@ -275,7 +323,7 @@
                 @foreach (var p in pointsOfAction)
                 {
                     <tr>
-                        <th scope="row"><input type="checkbox" id="checkBox1" @onclick="() => ChangeCheckboxStatus(p.PointOfActionId)"/></th>
+                        <th scope="row"><input type="checkbox" id="checkBox1" @onclick="() => ChangeCheckboxStatus(p.PointOfActionId)" /></th>
                         <th>@p.Description</th>
                         <th>@p.Category</th>
                         <th>@p.Accountable</th>
@@ -300,6 +348,13 @@
     </div>
 </div>
 
+@*<div class="container">
+    <form action="/action_page.php">
+        <textarea id="subject" name="subject" placeholder="Skriv handlingsplans beskrivningen här..." style="height:200px"></textarea>
+
+        <input type="submit" value="Skapa">
+    </form>
+</div>*@
 
 
 @code{
@@ -314,6 +369,8 @@
     DateTime endDate = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).AddMonths(1).AddDays(-1);
     int selectedWeekIndex = -1;
     int selectedDayIndex = -1;
+
+    string selectedActionOfTheDayOption = default;
     #endregion
 
     //Handlingsplan
@@ -406,7 +463,8 @@
             Quality = currentObject == null ? "" : currentObject.Quality,
             Delivery = currentObject == null ? "" : currentObject.Delivery,
             Material = currentObject == null ? "" : currentObject.Material,
-            Tidy = currentObject == null ? "" : currentObject.Tidy
+            Tidy = currentObject == null ? "" : currentObject.Tidy,
+            Actions_Id = currentObject == null ? 0 : currentObject.Actions_Id
 
         });
 
@@ -461,6 +519,8 @@ private void SaveNote()
         weeks[selectedWeekIndex].Dates[selectedDayIndex].Delivery = dayEvent.Delivery;
         weeks[selectedWeekIndex].Dates[selectedDayIndex].Material = dayEvent.Material;
         weeks[selectedWeekIndex].Dates[selectedDayIndex].Tidy = dayEvent.Tidy;
+        weeks[selectedWeekIndex].Dates[selectedDayIndex].ActionsOfTheDay = dayEvent.ActionsOfTheDay;
+
 
         ResetModal();
     }
@@ -508,6 +568,11 @@ public List<string> GetTidyOptions()
     return Enum.GetNames(typeof(TidyOptions)).ToList();
 }
 
+public List<string> ActionsOfTheDayTypes()
+{
+    return Enum.GetNames(typeof(ActionsOfTheDayTypes)).ToList();
+}
+
 //Handlingsplan
 
 public List<string> GetActionStatuses()
@@ -526,7 +591,7 @@ private void SaveAction()
 {
     string sql = "insert into pointsOfAction (Description, Category, Accountable, Project, Status, ActionDate) values (@Description, @Category, @Accountable, @Project, @Status, @ActionDate)";
 
-    _data.SavePointOfAction(sql, new { Description = @description, Category = @category, Accountable = @accountable, Project = @project, Status = @selectedStatus, ActionDate = DateTime.Now}, _config.GetConnectionString("DagligStyrningDB"));
+    _data.SavePointOfAction(sql, new { Description = @description, Category = @category, Accountable = @accountable, Project = @project, Status = @selectedStatus, ActionDate = DateTime.Now }, _config.GetConnectionString("DagligStyrningDB"));
 
     GetPointsOfAction();
     InitCheckboxStatus();
@@ -667,7 +732,7 @@ public void InitCheckboxStatus()
 
 public void ChangeCheckboxStatus(int s)
 {
-    if(checkboxStatus[s] == false)
+    if (checkboxStatus[s] == false)
     {
         checkboxStatus[s] = true;
     }
