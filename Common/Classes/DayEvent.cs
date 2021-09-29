@@ -23,7 +23,7 @@ namespace Common.Classes
         public string Material { get; set; } = "";
         public string Tidy { get; set; } = "";
 
-        public ActionsOfTheDay ActionsOfTheDay { get; set; }
+        public string ActionsOfTheDay { get; set; } = "";
         public int Actions_Id { get; set; }
         public string ActionsOfTheDayTypes { get; set; } = "";
     }

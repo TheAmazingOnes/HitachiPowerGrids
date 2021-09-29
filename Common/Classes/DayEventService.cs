@@ -117,7 +117,7 @@ namespace Common.Classes
                 parameters.Add("@Delivery", oDayEvent.Delivery);
                 parameters.Add("@Material", oDayEvent.Material);
                 parameters.Add("@Tidy", oDayEvent.Tidy);
-                parameters.Add("@Actions_Id", oDayEvent.ActionsOfTheDay);
+                parameters.Add("@ActionsOfTheDay", oDayEvent.ActionsOfTheDay);
 
                 using (IDbConnection con = new SqlConnection(Configuration.GetConnectionString("DagligStyrningDB")))
                 {
@@ -128,13 +128,13 @@ namespace Common.Classes
                     {
                         q = @"
                         INSERT 
-                        INTO   DayEvent(Note, EventDate, Safety, Quality, Delivery, Material, Tidy)
-                        VALUES (@Note,@EventDate,@Safety, @Quality, @Delivery, @Material, @Tidy); SELECT SCOPE_IDENTITY() ";
+                        INTO   DayEvent(Note, EventDate, Safety, Quality, Delivery, Material, Tidy, ActionsOfTheDay)
+                        VALUES (@Note,@EventDate,@Safety, @Quality, @Delivery, @Material, @Tidy, @ActionsOfTheDay); SELECT SCOPE_IDENTITY() ";
                     }
                     else
                     {
                         q = @"UPDATE   DayEvent
-                            SET   Note = @Note, EventDate = @EventDate, Safety = @Safety, Quality = @Quality, Delivery = @Delivery, Material = @Material, Tidy = @Tidy
+                            SET   Note = @Note, EventDate = @EventDate, Safety = @Safety, Quality = @Quality, Delivery = @Delivery, Material = @Material, Tidy = @Tidy, ActionsOfTheDay = @ActionsOfTheDay
                             WHERE DayEventId = @DayEventId";
                     }
 
@@ -177,7 +177,7 @@ namespace Common.Classes
             parameters.Add("@Delivery", oDayEvent.Delivery);
             parameters.Add("@Material", oDayEvent.Material);
             parameters.Add("@Tidy", oDayEvent.Tidy);
-            parameters.Add("@Actions_Id", oDayEvent.ActionsOfTheDay);
+            parameters.Add("@ActionsOfTheDay", oDayEvent.ActionsOfTheDay);
 
             return parameters;
         }

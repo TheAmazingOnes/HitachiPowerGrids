@@ -142,8 +142,8 @@
                         <label>Stop! Take 5 : </label>
                     </div>
                     <div class="col-md-6">
-                        <select style="height: 31px; width: 100%;" @bind="@selectedActionOfTheDayOption">
-                            @foreach (var type in ActionsOfTheDayTypes())
+                        <select style="height: 31px; width: 100%;" @bind="@dayEvent.ActionsOfTheDay">
+                            @foreach (var type in GetActionsOfTheDayTypes())
                             {
                                 <option value=@type>@type</option>
                             }
@@ -249,21 +249,21 @@
                     {
                         <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
                     }
-                    else if (weeks[weekIndex].Dates[dayIndex].Tidy == "Åtgärd_Krävs")
+                    else if (weeks[weekIndex].Dates[dayIndex].Tidy == "Åtgärd_krävs")
                     {
                         <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
                     }
                     <br /><br />
-                    @if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes == "Signerad")
+                    @if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay == "Signerad")
                     {
-                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes</label>
+                        <label style="color:black; font-weight: bold">Stop! Take Five:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay</label>
                     }
-                    else if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes == "Åtgärd_Krävs")
+                    else if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay == "Åtgärd_krävs")
                     {
-                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDayTypes</label>
+                        <label style="color:black; font-weight: bold">Stop! Take Five:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay</label>
                     }
                     <br /><br />
-                    <label style="color:#c00; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Note</label>
+                    <label style="color:black; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Note</label>
                 </td>
                 }
             </tr>
@@ -370,7 +370,6 @@
     int selectedWeekIndex = -1;
     int selectedDayIndex = -1;
 
-    string selectedActionOfTheDayOption = default;
     #endregion
 
     //Handlingsplan
@@ -464,7 +463,7 @@
             Delivery = currentObject == null ? "" : currentObject.Delivery,
             Material = currentObject == null ? "" : currentObject.Material,
             Tidy = currentObject == null ? "" : currentObject.Tidy,
-            Actions_Id = currentObject == null ? 0 : currentObject.Actions_Id
+            ActionsOfTheDay = currentObject == null ? "" : currentObject.ActionsOfTheDay
 
         });
 
@@ -568,7 +567,7 @@ public List<string> GetTidyOptions()
     return Enum.GetNames(typeof(TidyOptions)).ToList();
 }
 
-public List<string> ActionsOfTheDayTypes()
+public List<string> GetActionsOfTheDayTypes()
 {
     return Enum.GetNames(typeof(ActionsOfTheDayTypes)).ToList();
 }
