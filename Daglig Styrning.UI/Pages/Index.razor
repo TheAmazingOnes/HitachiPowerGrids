@@ -11,32 +11,33 @@
 @inject IConfiguration _config
 @*https://github.com/TheAmazingOnes/HitachiPowerGrids.git*@
 
-<div class="d-flex flex-column justify-content-center align-items-center text-center">
-    @*First centering the container horizontally then vertically*@
-    <div class="display-6 heading-font heading-font mt-5 mb-1">Daglig styrning</div>
-    <nav class="d-flex flex-row max-width align-items-center justify-content-center p-1 mx-auto bg-white">
-        <img src="images/SQLMO whole.png">
-        <div class="d-none d-md-flex">
-            @*Adjusts visibility with the size of the screen*@
-        </div>
-    </nav>
-</div>
+<div class="display-4 heading-font mt-5 mb-1 text-allign text-center">Daglig styrning</div>
 
-<div class="d-flex flex-column justify-content-center align-items-center text-center">
-    <div class="display-6 heading-font heading-font mt-5 mb-1 thicker">STOP! Take 5</div>
-    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Stanna upp</div>
-    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Tänk efter</div>
-    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Identifiera risker</div>
-    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Planera arbetet</div>
-    <div class="display-8 heading-font heading-font mt-5 mb-1 thick">Jobba säkert och med hög kvalitet</div>
-    <nav class="d-flex flex-row max-width align-items-center justify-content-center p-1 mx-auto bg-white">
-        <img src="images/StopTakeFive.PNG">
-        <div class="d-none d-md-flex">
-            @*Adjusts visibility with the size of the screen*@
-        </div>
-    </nav>
+<div class="d-flex flex-row">
+    <div class="d-flex flex-column justify-content-center align-items-center text-center">
+        @*First centering the container horizontally then vertically*@
+        <nav class="d-flex flex-row max-width align-items-center justify-content-center p-1 mx-auto bg-white">
+            <img src="images/SQLMO whole.png">
+            <div class="d-none d-md-flex"></div>
+        </nav>
+    </div>
 
-    @*<h1 class="thicker"><u>Dagens Åtgärder:</u></h1>
+    <div class="d-flex flex-row justify-content-center align-items-center text-center ml-3">
+        <div class="d-flex flex-column justify-content-center align-items-center text-center p-1 mx-auto bg-white">
+               <div class="display-6 heading-font mt-5 mb-1 thicker">STOP! Take 5</div>
+            <img src="images/StopTakeFive.PNG">
+            <div class="d-none d-md-flex"></div>
+        </div>
+        <div class="d-flex flex-column justify-content-center text-center mt-25 ml-3">
+            <div class="display-8 heading-font mt-1 thick">Stanna upp</div>
+            <div class="display-8 heading-font mt-2 thick">Tänk efter</div>
+            <div class="display-8 heading-font mt-2 thick">Identifiera risker</div>
+            <div class="display-8 heading-font mt-2 thick">Planera arbetet</div>
+            <div class="display-8 heading-font mt-2 thick">Jobba säkert och med hög kvalitet</div>
+        </div>
+    </div>
+
+        @*<h1 class="thicker"><u>Dagens Åtgärder:</u></h1>
         <form action="/action_page.php">
             <input type="checkbox" id="Åtgärd1" name="Åtgärd1" value="Åtgärd">
             <label for="vehicle1" class="thick"> Åtgärd 1</label><br>
@@ -46,14 +47,14 @@
             <input type="submit" class="text-success thicker" value="Signera dagen">
             <input type="submit" class="text-info thicker" value="Ny åtgärd">
         </form>*@
-</div>
+    </div>
 
 @if (displayModal)
 {
     <div id="divModal">
         <div class="container">
             <div class="panel panel-default">
-                <div class="panel-heading modalHeading">SQLMO</div>
+                <div class="panel-heading modalHeading">Välj datum</div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-5">
@@ -72,6 +73,7 @@
                         <input type="date" @bind-value="@dayEvent.ToDate" style="width: 100%;" />
                     </div>
                 </div>
+                <div class="panel-heading modalHeading">SQLMO</div>
                 <div class="row">
                     <div class="col-md-5">
                         <label style="margin-top: 10px;">Säkerhet : </label>
@@ -126,7 +128,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <label>Ordning & reda : </label>
+                        <label>Ordning & reda: </label>
                     </div>
                     <div class="col-md-6">
                         <select style="height: 31px; width: 100%;" @bind="@dayEvent.Tidy">
@@ -137,6 +139,7 @@
                         </select>
                     </div>
                 </div>
+                <div class="panel-heading modalHeading">Stop! Take 5</div>
                 <div class="row">
                     <div class="col-md-5">
                         <label>Stop! Take 5 : </label>
@@ -182,7 +185,7 @@
     }
 </select>
 
-<table class="table table-bordered table-striped">
+<table class="tableCalendar table-bordered table-striped">
     <thead>
         <tr>
             @for (var dayIndex = 0; dayIndex < days.Count(); dayIndex++)
@@ -202,76 +205,76 @@
                     var wIndex = weekIndex;
                     var dIndex = dayIndex;
 
-                <td @onclick="@(() => OpenModal(wIndex, dIndex))">
-                    @weeks[weekIndex].Dates[dayIndex].DateValue
-                    <br /><br />
-                    @if (weeks[weekIndex].Dates[dayIndex].Safety == "OK")
-                    {
-                        <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
-                    }
-                    else if (weeks[weekIndex].Dates[dayIndex].Safety == "Tillbud")
-                    {
-                        <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:blue; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
-                    }
-                    else if (weeks[weekIndex].Dates[dayIndex].Safety == "Olycka")
-                    {
-                        <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
-                    }
-                    <br /><br />
-                    @if (weeks[weekIndex].Dates[dayIndex].Quality == "OK")
-                    {
-                        <label style="color:black; font-weight: bold">Kvalitet:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Quality</label>
-                    }
-                    else if (weeks[weekIndex].Dates[dayIndex].Quality == "Kvalitetsproblem")
-                    {
-                        <label style="color:black; font-weight: bold">Kvalitet:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Quality</label>
-                    }
-                    <br /><br />
-                    @if (weeks[weekIndex].Dates[dayIndex].Delivery == "OK")
-                    {
-                        <label style="color:black; font-weight: bold">Leverans:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Delivery</label>
-                    }
-                    else if (weeks[weekIndex].Dates[dayIndex].Delivery == "Leveransproblem")
-                    {
-                        <label style="color:black; font-weight: bold">Leverans:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Delivery</label>
-                    }
-                    <br /><br />
-                    @if (weeks[weekIndex].Dates[dayIndex].Material == "OK")
-                    {
-                        <label style="color:black; font-weight: bold">Material:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Material</label>
-                    }
-                    else if (weeks[weekIndex].Dates[dayIndex].Material == "Materialproblem")
-                    {
-                        <label style="color:black; font-weight: bold">Material:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Material</label>
-                    }
-                    <br /><br />
-                    @if (weeks[weekIndex].Dates[dayIndex].Tidy == "OK")
-                    {
-                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
-                    }
-                    else if (weeks[weekIndex].Dates[dayIndex].Tidy == "Åtgärd_krävs")
-                    {
-                        <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
-                    }
-                    <br /><br />
-                    @if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay == "Signerad")
-                    {
-                        <label style="color:black; font-weight: bold">Stop! Take Five:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay</label>
-                    }
-                    else if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay == "Åtgärd_krävs")
-                    {
-                        <label style="color:black; font-weight: bold">Stop! Take Five:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay</label>
-                    }
-                    <br /><br />
-                    <label style="color:black; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Note</label>
-                </td>
+                    <td @onclick="@(() => OpenModal(wIndex, dIndex))">
+                        @weeks[weekIndex].Dates[dayIndex].DateValue
+                        <br /><br />
+                        @if (weeks[weekIndex].Dates[dayIndex].Safety == "OK")
+                        {
+                            <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
+                        }
+                        else if (weeks[weekIndex].Dates[dayIndex].Safety == "Tillbud")
+                        {
+                            <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:blue; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
+                        }
+                        else if (weeks[weekIndex].Dates[dayIndex].Safety == "Olycka")
+                        {
+                            <label style="color:black; font-weight: bold">Säkerhet:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Safety</label>
+                        }
+                        <br /><br />
+                        @if (weeks[weekIndex].Dates[dayIndex].Quality == "OK")
+                        {
+                            <label style="color:black; font-weight: bold">Kvalitet:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Quality</label>
+                        }
+                        else if (weeks[weekIndex].Dates[dayIndex].Quality == "Kvalitetsproblem")
+                        {
+                            <label style="color:black; font-weight: bold">Kvalitet:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Quality</label>
+                        }
+                        <br /><br />
+                        @if (weeks[weekIndex].Dates[dayIndex].Delivery == "OK")
+                        {
+                            <label style="color:black; font-weight: bold">Leverans:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Delivery</label>
+                        }
+                        else if (weeks[weekIndex].Dates[dayIndex].Delivery == "Leveransproblem")
+                        {
+                            <label style="color:black; font-weight: bold">Leverans:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Delivery</label>
+                        }
+                        <br /><br />
+                        @if (weeks[weekIndex].Dates[dayIndex].Material == "OK")
+                        {
+                            <label style="color:black; font-weight: bold">Material:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Material</label>
+                        }
+                        else if (weeks[weekIndex].Dates[dayIndex].Material == "Materialproblem")
+                        {
+                            <label style="color:black; font-weight: bold">Material:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Material</label>
+                        }
+                        <br /><br />
+                        @if (weeks[weekIndex].Dates[dayIndex].Tidy == "OK")
+                        {
+                            <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
+                        }
+                        else if (weeks[weekIndex].Dates[dayIndex].Tidy == "Åtgärd_krävs")
+                        {
+                            <label style="color:black; font-weight: bold">Ordning & reda:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Tidy</label>
+                        }
+                        <br /><br />
+                        @if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay == "Signerad")
+                        {
+                            <label style="color:black; font-weight: bold">Stop! Take Five:&nbsp</label><label style="color:limegreen; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay</label>
+                        }
+                        else if (weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay == "Åtgärd_krävs")
+                        {
+                            <label style="color:black; font-weight: bold">Stop! Take Five:&nbsp</label><label style="color:red; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].ActionsOfTheDay</label>
+                        }
+                        <br /><br />
+                        <label style="color:black; font-weight: bold">@weeks[weekIndex].Dates[dayIndex].Note</label>
+                    </td>
                 }
             </tr>
         }
     </tbody>
 </table>
 
-
+<div class="mt-5"></div>
 <h4>Handlingsplan</h4>
 @*Felmeddelande*@
 @if (error != string.Empty)
@@ -303,20 +306,20 @@
                 <tr>
                     @*Ändra till egen css-fil*@
                     <th scope="row"></th>
-                    <td><input style="height:31px;" placeholder="Beskrivning" @bind="description" /></td>
-                    <td><input style="height:31px;" placeholder="Kategori" @bind="category" /></td>
-                    <td><input style="height:31px;" placeholder="Ansvarig" @bind="accountable" /></td>
-                    <td><input style="height:31px;" placeholder="Projekt" @bind="project" /></td>
+                    <td><input type="text" style="height:31px;" placeholder="Beskrivning" @bind="description" /></td>
+                    <td><input type="text" style="height:31px;" placeholder="Kategori" @bind="category" /></td>
+                    <td><input type="text" style="height:31px;" placeholder="Ansvarig" @bind="accountable" /></td>
+                    <td><input type="text" style="height:31px;" placeholder="Projekt" @bind="project" /></td>
                     <td>
                         <select style="height:31px;" @bind="@selectedStatus">
                             @foreach (var type in GetActionStatuses())
                             {
                                 <option value=@type>@type</option>
                             }
-                        </select>
+                        </select>           
                     </td>
                     @*Datepicker?*@
-                    <td><input style="height:31px;" placeholder="Datum" @bind="actionDate" /></td>
+                    <td><input type="date" style="height:31px;" placeholder="Datum" @bind="actionDate" /></td>
                     <td><button class="btn btn-success btn-sm" @onclick="SaveAction">Skapa</button></td>
                 </tr>
                 @*Skriver ut varje handlingspunkt som vi skapat*@
@@ -349,12 +352,12 @@
 </div>
 
 @*<div class="container">
-    <form action="/action_page.php">
-        <textarea id="subject" name="subject" placeholder="Skriv handlingsplans beskrivningen här..." style="height:200px"></textarea>
+        <form action="/action_page.php">
+            <textarea id="subject" name="subject" placeholder="Skriv handlingsplans beskrivningen här..." style="height:200px"></textarea>
 
-        <input type="submit" value="Skapa">
-    </form>
-</div>*@
+            <input type="submit" value="Skapa">
+        </form>
+    </div>*@
 
 
 @code{
@@ -450,294 +453,294 @@
                     DayName = dt.ToString("dddd")
                 });*@
 
-        var currentObject = dayEvents.Find(x => x.EventDate.ToString("dd-MMM-yyyy") == dt.ToString("dd-MMM-yyyy"));
+            var currentObject = dayEvents.Find(x => x.EventDate.ToString("dd-MMM-yyyy") == dt.ToString("dd-MMM-yyyy"));
 
-        dates.Add(new DayEvent()
-        {
-            DayEventId = currentObject == null ? 0 : currentObject.DayEventId,
-            DateValue = dt.ToString("dd-MMM-yyyy"),
-            DayName = dt.ToString("dddd"),
-            Note = currentObject == null ? "" : currentObject.Note,
-            Safety = currentObject == null ? "" : currentObject.Safety,
-            Quality = currentObject == null ? "" : currentObject.Quality,
-            Delivery = currentObject == null ? "" : currentObject.Delivery,
-            Material = currentObject == null ? "" : currentObject.Material,
-            Tidy = currentObject == null ? "" : currentObject.Tidy,
-            ActionsOfTheDay = currentObject == null ? "" : currentObject.ActionsOfTheDay
+            dates.Add(new DayEvent()
+            {
+                DayEventId = currentObject == null ? 0 : currentObject.DayEventId,
+                DateValue = dt.ToString("dd-MMM-yyyy"),
+                DayName = dt.ToString("dddd"),
+                Note = currentObject == null ? "" : currentObject.Note,
+                Safety = currentObject == null ? "" : currentObject.Safety,
+                Quality = currentObject == null ? "" : currentObject.Quality,
+                Delivery = currentObject == null ? "" : currentObject.Delivery,
+                Material = currentObject == null ? "" : currentObject.Material,
+                Tidy = currentObject == null ? "" : currentObject.Tidy,
+                ActionsOfTheDay = currentObject == null ? "" : currentObject.ActionsOfTheDay
 
-        });
+            });
 
-        if (flag == 7)
-        {
-            week = new Week();
-            week.Dates = dates;
-            weeks.Add(week);
+            if (flag == 7)
+            {
+                week = new Week();
+                week.Dates = dates;
+                weeks.Add(week);
 
-            dates = new List<DayEvent>();
-            flag = 0;
+                dates = new List<DayEvent>();
+                flag = 0;
+            }
+
+            if (countdays == totalDays)
+            {
+                week = new Week();
+                week.Dates = dates;
+                weeks.Add(week);
+                break;
+            }
+
+            countdays++;
         }
-
-        if (countdays == totalDays)
-        {
-            week = new Week();
-            week.Dates = dates;
-            weeks.Add(week);
-            break;
-        }
-
-        countdays++;
     }
-}
 
-private void CloseModal()
-{
-    ResetModal();
-}
-
-private void OpenModal(int wIndex, int dIndex)
-{
-    selectedWeekIndex = wIndex;
-    selectedDayIndex = dIndex;
-
-    var dayEventObj = dayEventService.GetEvent(Convert.ToDateTime(weeks[wIndex].Dates[dIndex].DateValue));
-    dayEvent = dayEventObj;
-
-    displayModal = true;
-}
-
-private void SaveNote()
-{
-    dayEvent = dayEventService.SaveOrUpdate(dayEvent);
-    if (dayEvent.DayEventId > 0)
+    private void CloseModal()
     {
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].DayEventId = dayEvent.DayEventId;
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].Note = dayEvent.Note;
-
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].Safety = dayEvent.Safety;
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].Quality = dayEvent.Quality;
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].Delivery = dayEvent.Delivery;
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].Material = dayEvent.Material;
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].Tidy = dayEvent.Tidy;
-        weeks[selectedWeekIndex].Dates[selectedDayIndex].ActionsOfTheDay = dayEvent.ActionsOfTheDay;
-
-
         ResetModal();
     }
-}
 
-private void DeleteDayEvent()
-{
-    dayEventService.Delete(dayEvent.DayEventId);
-    ResetModal();
-
-    GenerateCalendarHead();
-    GenerateCalendarBody();
-}
-
-private void ResetModal()
-{
-    displayModal = false;
-    selectedDayIndex = -1;
-    selectedWeekIndex = -1;
-}
-
-//Dropdown för Set Note
-public List<string> GetSafetyOptions()
-{
-    return Enum.GetNames(typeof(SafetyOptions)).ToList();
-}
-
-public List<string> GetQualityOptions()
-{
-    return Enum.GetNames(typeof(QualityOptions)).ToList();
-}
-
-public List<string> GetDeliveryOptions()
-{
-    return Enum.GetNames(typeof(DeliveryOptions)).ToList();
-}
-
-public List<string> GetMaterialOptions()
-{
-    return Enum.GetNames(typeof(MaterialOptions)).ToList();
-}
-
-public List<string> GetTidyOptions()
-{
-    return Enum.GetNames(typeof(TidyOptions)).ToList();
-}
-
-public List<string> GetActionsOfTheDayTypes()
-{
-    return Enum.GetNames(typeof(ActionsOfTheDayTypes)).ToList();
-}
-
-//Handlingsplan
-
-public List<string> GetActionStatuses()
-{
-    return Enum.GetNames(typeof(ActionPointStatuses)).ToList();
-}
-
-private void GetPointsOfAction()
-{
-    string sql = "select * from PointsOfAction where Status != 'Arkiverad'";
-
-    pointsOfAction = _data.GetPointsOfAction<PointsOfActionModel, dynamic>(sql, new { }, _config.GetConnectionString("DagligStyrningDB"));
-}
-
-private void SaveAction()
-{
-    string sql = "insert into pointsOfAction (Description, Category, Accountable, Project, Status, ActionDate) values (@Description, @Category, @Accountable, @Project, @Status, @ActionDate)";
-
-    _data.SavePointOfAction(sql, new { Description = @description, Category = @category, Accountable = @accountable, Project = @project, Status = @selectedStatus, ActionDate = DateTime.Now }, _config.GetConnectionString("DagligStyrningDB"));
-
-    GetPointsOfAction();
-    InitCheckboxStatus();
-
-    description = string.Empty;
-    accountable = string.Empty;
-    category = default;
-    project = string.Empty;
-    selectedStatus = default;
-    actionDate = DateTime.Now;
-}
-
-void UpdateActionStatusToStarted()
-{
-    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+    private void OpenModal(int wIndex, int dIndex)
     {
-        int dbId;
-        if (valuePair.Value == true)
+        selectedWeekIndex = wIndex;
+        selectedDayIndex = dIndex;
+
+        var dayEventObj = dayEventService.GetEvent(Convert.ToDateTime(weeks[wIndex].Dates[dIndex].DateValue));
+        dayEvent = dayEventObj;
+
+        displayModal = true;
+    }
+
+    private void SaveNote()
+    {
+        dayEvent = dayEventService.SaveOrUpdate(dayEvent);
+        if (dayEvent.DayEventId > 0)
         {
-            try
-            {
-                string dbIdString = valuePair.Key.ToString();
-                string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].DayEventId = dayEvent.DayEventId;
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].Note = dayEvent.Note;
 
-                _data.SavePointOfAction(sql, new { Status = "Påbörjad" }, _config.GetConnectionString("DagligStyrningDB"));
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].Safety = dayEvent.Safety;
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].Quality = dayEvent.Quality;
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].Delivery = dayEvent.Delivery;
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].Material = dayEvent.Material;
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].Tidy = dayEvent.Tidy;
+            weeks[selectedWeekIndex].Dates[selectedDayIndex].ActionsOfTheDay = dayEvent.ActionsOfTheDay;
 
-                GetPointsOfAction();
-                InitCheckboxStatus();
-            }
-            catch (Exception ex)
+
+            ResetModal();
+        }
+    }
+
+    private void DeleteDayEvent()
+    {
+        dayEventService.Delete(dayEvent.DayEventId);
+        ResetModal();
+
+        GenerateCalendarHead();
+        GenerateCalendarBody();
+    }
+
+    private void ResetModal()
+    {
+        displayModal = false;
+        selectedDayIndex = -1;
+        selectedWeekIndex = -1;
+    }
+
+    //Dropdown för Set Note
+    public List<string> GetSafetyOptions()
+    {
+        return Enum.GetNames(typeof(SafetyOptions)).ToList();
+    }
+
+    public List<string> GetQualityOptions()
+    {
+        return Enum.GetNames(typeof(QualityOptions)).ToList();
+    }
+
+    public List<string> GetDeliveryOptions()
+    {
+        return Enum.GetNames(typeof(DeliveryOptions)).ToList();
+    }
+
+    public List<string> GetMaterialOptions()
+    {
+        return Enum.GetNames(typeof(MaterialOptions)).ToList();
+    }
+
+    public List<string> GetTidyOptions()
+    {
+        return Enum.GetNames(typeof(TidyOptions)).ToList();
+    }
+
+    public List<string> GetActionsOfTheDayTypes()
+    {
+        return Enum.GetNames(typeof(ActionsOfTheDayTypes)).ToList();
+    }
+
+    //Handlingsplan
+
+    public List<string> GetActionStatuses()
+    {
+        return Enum.GetNames(typeof(ActionPointStatuses)).ToList();
+    }
+
+    private void GetPointsOfAction()
+    {
+        string sql = "select * from PointsOfAction where Status != 'Arkiverad'";
+
+        pointsOfAction = _data.GetPointsOfAction<PointsOfActionModel, dynamic>(sql, new { }, _config.GetConnectionString("DagligStyrningDB"));
+    }
+
+    private void SaveAction()
+    {
+        string sql = "insert into pointsOfAction (Description, Category, Accountable, Project, Status, ActionDate) values (@Description, @Category, @Accountable, @Project, @Status, @ActionDate)";
+
+        _data.SavePointOfAction(sql, new { Description = @description, Category = @category, Accountable = @accountable, Project = @project, Status = @selectedStatus, ActionDate = DateTime.Now }, _config.GetConnectionString("DagligStyrningDB"));
+
+        GetPointsOfAction();
+        InitCheckboxStatus();
+
+        description = string.Empty;
+        accountable = string.Empty;
+        category = default;
+        project = string.Empty;
+        selectedStatus = default;
+        actionDate = DateTime.Now;
+    }
+
+    void UpdateActionStatusToStarted()
+    {
+        foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+        {
+            int dbId;
+            if (valuePair.Value == true)
             {
-                //Tilldelar felmeddelandet
-                error = ex.Message;
+                try
+                {
+                    string dbIdString = valuePair.Key.ToString();
+                    string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
+
+                    _data.SavePointOfAction(sql, new { Status = "Påbörjad" }, _config.GetConnectionString("DagligStyrningDB"));
+
+                    GetPointsOfAction();
+                    InitCheckboxStatus();
+                }
+                catch (Exception ex)
+                {
+                    //Tilldelar felmeddelandet
+                    error = ex.Message;
+                }
             }
         }
     }
-}
 
-void UpdateActionStatusToEscalated()
-{
-    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+    void UpdateActionStatusToEscalated()
     {
-        int dbId;
-        if (valuePair.Value == true)
+        foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
         {
-            try
+            int dbId;
+            if (valuePair.Value == true)
             {
-                string dbIdString = valuePair.Key.ToString();
-                string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
+                try
+                {
+                    string dbIdString = valuePair.Key.ToString();
+                    string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
 
-                _data.SavePointOfAction(sql, new { Status = "Eskalerad" }, _config.GetConnectionString("DagligStyrningDB"));
+                    _data.SavePointOfAction(sql, new { Status = "Eskalerad" }, _config.GetConnectionString("DagligStyrningDB"));
 
-                GetPointsOfAction();
-                InitCheckboxStatus();
-            }
-            catch (Exception ex)
-            {
-                //Tilldelar felmeddelandet
-                error = ex.Message;
+                    GetPointsOfAction();
+                    InitCheckboxStatus();
+                }
+                catch (Exception ex)
+                {
+                    //Tilldelar felmeddelandet
+                    error = ex.Message;
+                }
             }
         }
     }
-}
 
-void FileAction()
-{
-    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+    void FileAction()
     {
-        int dbId;
-        if (valuePair.Value == true)
+        foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
         {
-            try
+            int dbId;
+            if (valuePair.Value == true)
             {
-                string dbIdString = valuePair.Key.ToString();
-                string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
+                try
+                {
+                    string dbIdString = valuePair.Key.ToString();
+                    string sql = "update pointsOfAction set Status = @Status where PointOfActionId = " + dbIdString;
 
-                _data.SavePointOfAction(sql, new { Status = "Arkiverad" }, _config.GetConnectionString("DagligStyrningDB"));
+                    _data.SavePointOfAction(sql, new { Status = "Arkiverad" }, _config.GetConnectionString("DagligStyrningDB"));
 
-                GetPointsOfAction();
-                InitCheckboxStatus();
-            }
-            catch (Exception ex)
-            {
-                //Tilldelar felmeddelandet
-                error = ex.Message;
+                    GetPointsOfAction();
+                    InitCheckboxStatus();
+                }
+                catch (Exception ex)
+                {
+                    //Tilldelar felmeddelandet
+                    error = ex.Message;
+                }
             }
         }
     }
-}
 
-void DeleteAction()
-{
-    foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
+    void DeleteAction()
     {
-        int dbId;
-        if (valuePair.Value == true)
+        foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
         {
-            try
+            int dbId;
+            if (valuePair.Value == true)
             {
-                string dbIdString = valuePair.Key.ToString();
-                string sql = "delete from pointsOfAction where PointOfActionId = @PointOfActionId";
+                try
+                {
+                    string dbIdString = valuePair.Key.ToString();
+                    string sql = "delete from pointsOfAction where PointOfActionId = @PointOfActionId";
 
-                _data.SavePointOfAction(sql, new { PointOfActionId = dbIdString }, _config.GetConnectionString("DagligStyrningDB"));
+                    _data.SavePointOfAction(sql, new { PointOfActionId = dbIdString }, _config.GetConnectionString("DagligStyrningDB"));
 
-                GetPointsOfAction();
-                InitCheckboxStatus();
-            }
-            catch (Exception ex)
-            {
-                //Tilldelar felmeddelandet
-                error = ex.Message;
+                    GetPointsOfAction();
+                    InitCheckboxStatus();
+                }
+                catch (Exception ex)
+                {
+                    //Tilldelar felmeddelandet
+                    error = ex.Message;
+                }
             }
         }
     }
-}
 
-private void DeleteData()
-{
-    string sql = "delete from pointsOfAction where Accountable = @Accountable";
-
-    _data.SavePointOfAction(sql, new { Accountable = "Lina" }, _config.GetConnectionString("DagligStyrningDB"));
-
-    OnInitialized();
-}
-
-
-//checkbox
-Dictionary<int, bool> checkboxStatus = new Dictionary<int, bool>();
-
-public void InitCheckboxStatus()
-{
-    checkboxStatus = new Dictionary<int, bool>();
-    foreach (var p in pointsOfAction)
+    private void DeleteData()
     {
-        checkboxStatus.Add(p.PointOfActionId, false);
-    }
-}
+        string sql = "delete from pointsOfAction where Accountable = @Accountable";
 
-public void ChangeCheckboxStatus(int s)
-{
-    if (checkboxStatus[s] == false)
-    {
-        checkboxStatus[s] = true;
+        _data.SavePointOfAction(sql, new { Accountable = "Lina" }, _config.GetConnectionString("DagligStyrningDB"));
+
+        OnInitialized();
     }
-    else
+
+
+    //checkbox
+    Dictionary<int, bool> checkboxStatus = new Dictionary<int, bool>();
+
+    public void InitCheckboxStatus()
     {
-        checkboxStatus[s] = false;
+        checkboxStatus = new Dictionary<int, bool>();
+        foreach (var p in pointsOfAction)
+        {
+            checkboxStatus.Add(p.PointOfActionId, false);
+        }
     }
-}
+
+    public void ChangeCheckboxStatus(int s)
+    {
+        if (checkboxStatus[s] == false)
+        {
+            checkboxStatus[s] = true;
+        }
+        else
+        {
+            checkboxStatus[s] = false;
+        }
+    }
 }

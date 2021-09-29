@@ -1,13 +1,10 @@
 ﻿using Common.Interfaces;
 using Dapper;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Linq;
 using System;
-using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
-using Common.Enum;
 
 namespace Common.Classes
 {

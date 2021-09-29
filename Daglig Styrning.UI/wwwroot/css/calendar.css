@@ -3,6 +3,26 @@
     height: 200px;
 }
 
+tableCalendar {
+    border-collapse: collapse;
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 180px;  
+    height: 100px;
+  }
+
+
+label {
+    /*display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 400px;
+    line-height: 26px;*/
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 #divParent {
     position: relative;
 }
