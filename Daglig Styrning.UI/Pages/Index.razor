@@ -15,16 +15,15 @@
 
 <div class="d-flex flex-row">
     <div class="d-flex flex-column justify-content-center align-items-center text-center">
-        @*First centering the container horizontally then vertically*@
         <nav class="d-flex flex-row max-width align-items-center justify-content-center p-1 mx-auto bg-white">
             <img src="images/SQLMO whole.png">
             <div class="d-none d-md-flex"></div>
         </nav>
     </div>
 
-    <div class="d-flex flex-row justify-content-center align-items-center text-center ml-3">
+    <div class="d-flex flex-row justify-content-center align-items-center text-center ml-5">
         <div class="d-flex flex-column justify-content-center align-items-center text-center p-1 mx-auto bg-white">
-               <div class="display-6 heading-font mt-5 mb-1 thicker">STOP! Take 5</div>
+            <div class="display-6 heading-font mt-5 mb-1 thicker">STOP! Take 5</div>
             <img src="images/StopTakeFive.PNG">
             <div class="d-none d-md-flex"></div>
         </div>
@@ -36,18 +35,7 @@
             <div class="display-8 heading-font mt-2 thick">Jobba säkert och med hög kvalitet</div>
         </div>
     </div>
-
-        @*<h1 class="thicker"><u>Dagens Åtgärder:</u></h1>
-        <form action="/action_page.php">
-            <input type="checkbox" id="Åtgärd1" name="Åtgärd1" value="Åtgärd">
-            <label for="vehicle1" class="thick"> Åtgärd 1</label><br>
-            <input type="checkbox" id="Åtgärd2" name="Åtgärd2" value="Åtgärd">
-            <label for="vehicle2" class="thick"> Åtgärd 2</label><br>
-            <input type="text" class="signature" />
-            <input type="submit" class="text-success thicker" value="Signera dagen">
-            <input type="submit" class="text-info thicker" value="Ny åtgärd">
-        </form>*@
-    </div>
+</div>
 
 @if (displayModal)
 {
@@ -175,7 +163,6 @@
             </div>
         </div>
     </div>
-
 }
 
 <select @onchange="LoadCalendar">
@@ -276,7 +263,6 @@
 
 <div class="mt-5"></div>
 <h4>Handlingsplan</h4>
-@*Felmeddelande*@
 @if (error != string.Empty)
 {
     <div class="row">
@@ -288,8 +274,7 @@
 
 <div class="row">
     <div class="col-10">
-        <table class="table table-hover" style="border:1px solid">
-            @*Ändra till egen css-fil*@
+        <table class="table table-hover mb-5" style="border:1px solid">
             <thead class="thead-light">
                 <tr>
                     <th scope="col"></th>
@@ -304,7 +289,6 @@
             </thead>
             <tbody>
                 <tr>
-                    @*Ändra till egen css-fil*@
                     <th scope="row"></th>
                     <td><input type="text" style="height:31px;" placeholder="Beskrivning" @bind="description" /></td>
                     <td><input type="text" style="height:31px;" placeholder="Kategori" @bind="category" /></td>
@@ -316,9 +300,8 @@
                             {
                                 <option value=@type>@type</option>
                             }
-                        </select>           
+                        </select>
                     </td>
-                    @*Datepicker?*@
                     <td><input type="date" style="height:31px;" placeholder="Datum" @bind="actionDate" /></td>
                     <td><button class="btn btn-success btn-sm" @onclick="SaveAction">Skapa</button></td>
                 </tr>
@@ -351,19 +334,9 @@
     </div>
 </div>
 
-@*<div class="container">
-        <form action="/action_page.php">
-            <textarea id="subject" name="subject" placeholder="Skriv handlingsplans beskrivningen här..." style="height:200px"></textarea>
-
-            <input type="submit" value="Skapa">
-        </form>
-    </div>*@
-
-
 @code{
 
-    //Kalender
-    #region Variabler
+    #region Variabler Kalender
     bool displayModal = false;
     List<string> monthNames = new List<string>();
     List<string> days = new List<string>();
@@ -372,11 +345,9 @@
     DateTime endDate = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).AddMonths(1).AddDays(-1);
     int selectedWeekIndex = -1;
     int selectedDayIndex = -1;
-
     #endregion
 
-    //Handlingsplan
-    #region Variabler
+    #region Variabler Handlingsplan
     string error = string.Empty;
     string description = string.Empty;
     string accountable = string.Empty;
@@ -387,12 +358,10 @@
     IEnumerable<IPointOfAction> actionpoints;
     #endregion
 
-    //DataAccess
-    #region Variabler
+    #region Variabler DataAccess
     List<PointsOfActionModel> pointsOfAction;
     #endregion
 
-    //Körs när sidan laddas
     protected override void OnInitialized()
     {
         monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames.ToList();
@@ -523,7 +492,6 @@
             weeks[selectedWeekIndex].Dates[selectedDayIndex].Tidy = dayEvent.Tidy;
             weeks[selectedWeekIndex].Dates[selectedDayIndex].ActionsOfTheDay = dayEvent.ActionsOfTheDay;
 
-
             ResetModal();
         }
     }
@@ -576,7 +544,6 @@
     }
 
     //Handlingsplan
-
     public List<string> GetActionStatuses()
     {
         return Enum.GetNames(typeof(ActionPointStatuses)).ToList();
@@ -625,7 +592,6 @@
                 }
                 catch (Exception ex)
                 {
-                    //Tilldelar felmeddelandet
                     error = ex.Message;
                 }
             }
@@ -636,7 +602,6 @@
     {
         foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
         {
-            int dbId;
             if (valuePair.Value == true)
             {
                 try
@@ -651,7 +616,6 @@
                 }
                 catch (Exception ex)
                 {
-                    //Tilldelar felmeddelandet
                     error = ex.Message;
                 }
             }
@@ -662,7 +626,6 @@
     {
         foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
         {
-            int dbId;
             if (valuePair.Value == true)
             {
                 try
@@ -677,7 +640,6 @@
                 }
                 catch (Exception ex)
                 {
-                    //Tilldelar felmeddelandet
                     error = ex.Message;
                 }
             }
@@ -688,7 +650,6 @@
     {
         foreach (KeyValuePair<int, bool> valuePair in checkboxStatus)
         {
-            int dbId;
             if (valuePair.Value == true)
             {
                 try
@@ -703,24 +664,13 @@
                 }
                 catch (Exception ex)
                 {
-                    //Tilldelar felmeddelandet
                     error = ex.Message;
                 }
             }
         }
     }
 
-    private void DeleteData()
-    {
-        string sql = "delete from pointsOfAction where Accountable = @Accountable";
-
-        _data.SavePointOfAction(sql, new { Accountable = "Lina" }, _config.GetConnectionString("DagligStyrningDB"));
-
-        OnInitialized();
-    }
-
-
-    //checkbox
+    //Checkbox
     Dictionary<int, bool> checkboxStatus = new Dictionary<int, bool>();
 
     public void InitCheckboxStatus()

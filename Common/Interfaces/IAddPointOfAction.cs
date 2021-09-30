@@ -7,7 +7,6 @@ namespace Common.Interfaces
 {
     public interface IAddPointOfAction
     {
-        //Behövs Id för denna? Räcker med id för PointOfAction?
         int Id { get; }
         int PointOfActionId { get; }
         

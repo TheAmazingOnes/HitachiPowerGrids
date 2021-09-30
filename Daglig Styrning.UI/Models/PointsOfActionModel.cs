@@ -14,6 +14,5 @@ namespace Daglig_Styrning.UI.Models
         public string Project { get; set; }
         public string Status { get; set; }
         public DateTime ActionDate { get; set; }
-
     }
 }

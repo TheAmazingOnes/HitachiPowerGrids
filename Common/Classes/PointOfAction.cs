@@ -8,7 +8,6 @@ namespace Common.Classes
 {
     public class PointOfAction : IPointOfAction
     {
-        //Med bara get (inga set) så kan vi tilldela ett värde en gång från construktorn, men kan inte tilldela värden efter det
         public int Id { get; }
         public string Description { get; set; }
         public string Category { get; set; }
@@ -19,7 +18,6 @@ namespace Common.Classes
 
         public PointOfAction(int id, string description, string category, string accountable, string project, ActionPointStatuses status, DateTime actionDate)
         {
-            //Måste skicka in dessa värden för att kunna skapa en handlingspunkt
             Id = id;
             Description = description;
             Category = category;

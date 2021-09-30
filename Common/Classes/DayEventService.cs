@@ -25,7 +25,6 @@ namespace Common.Classes
             string message = "";
             try
             {
-                
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@DayEventId", id);
 
@@ -34,23 +33,18 @@ namespace Common.Classes
                     con.Open();
                     string q = "";
 
-
                     q = @"DELETE FROM   DayEvent
                             WHERE DayEventId = @DayEventId";
                     con.Execute(q, parameters);
                     message = "Deleted";
-
                 }
             }
-
             catch (Exception ex)
             {
                 message = ex.Message;
             }
-
             return message;
         }
-
 
         public DayEvent GetEvent(DateTime eventDate)
         {
@@ -67,7 +61,6 @@ namespace Common.Classes
                 {
                     _oDayEvent = oDayEvents.SingleOrDefault();
                 }
-
                 else
                 {
                     _oDayEvent.EventDate = eventDate;
@@ -75,11 +68,8 @@ namespace Common.Classes
                     _oDayEvent.ToDate = eventDate;
                 }
             }
-
             return _oDayEvent;
-
         }
-
 
         public List<DayEvent> GetEvents(DateTime fromDate, DateTime toDate)
         {
@@ -100,7 +90,6 @@ namespace Common.Classes
                     _oDayEvents = oDayEvents;
                 }
             }
-
             return _oDayEvents;
         }
 
