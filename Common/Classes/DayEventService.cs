@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using Common.Enum;
 using Dapper;
 using System.Configuration;
+using System.Globalization;
 
 namespace Common.Classes
 {
@@ -53,7 +54,10 @@ namespace Common.Classes
             {
                 if (con.State == ConnectionState.Closed) con.Open();
 
-                string sql = string.Format(@"SELECT * FROM DayEvent WHERE EventDate = '{0}'", eventDate.ToString("dd-MMM-yyyy"));
+                CultureInfo ci = new CultureInfo("en-US");
+                string converted_date = eventDate.ToString("dd-MMM-yyyy", ci);
+
+                string sql = string.Format(@"SELECT * FROM DayEvent WHERE EventDate = '{0}'", converted_date);
 
                 var oDayEvents = con.Query<DayEvent>(sql).ToList();
 
@@ -81,7 +85,11 @@ namespace Common.Classes
                     con.Open();
                 }
 
-                string sql = string.Format(@"SELECT * FROM DayEvent WHERE EventDate BETWEEN '{0}' AND '{1}'", fromDate.ToString("dd-MMM-yyyy"), toDate.ToString("dd-MMM-yyyy"));
+
+                CultureInfo ci = new CultureInfo("en-US");
+                string converted_from_date = fromDate.ToString("dd-MMM-yyyy", ci);
+                string converted_to_date = toDate.ToString("dd-MMM-yyyy", ci);
+                string sql = string.Format(@"SELECT * FROM DayEvent WHERE EventDate BETWEEN '{0}' AND '{1}'", converted_from_date, converted_to_date);
 
                 var oDayEvents = con.Query<DayEvent>(sql).ToList();
 

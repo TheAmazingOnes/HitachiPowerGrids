@@ -5,6 +5,7 @@
 @using Common.Enum;
 @using Microsoft.Extensions.Configuration;
 @using UI.Models;
+@using System.Globalization;
 
 @inject IDayEventService dayEventService;
 @inject IDataAccess _data
@@ -341,7 +342,9 @@
     List<string> monthNames = new List<string>();
     List<string> days = new List<string>();
     List<Week> weeks = new List<Week>();
-    DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
+
+    DateTime startDate = new DateTime(DateTime.Now.Year, 10, 1);
     DateTime endDate = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).AddMonths(1).AddDays(-1);
     int selectedWeekIndex = -1;
     int selectedDayIndex = -1;
@@ -379,6 +382,7 @@
         ToDate = DateTime.Now,
         Note = ""
     };
+
 
     private void LoadCalendar(ChangeEventArgs e)
     {
